@@ -15,15 +15,8 @@ public class Snake {
 	Color colorTail = Color.GREEN;
 	Color colorHead = Color.RED;
 
-	// private Image head;
-	// private Image ball;
 
 	public Snake(int initDot, int type) {
-		// ImageIcon iid = new ImageIcon(this.getClass().getResource("dot.png"));
-		// ball = iid.getImage();
-		//
-		// ImageIcon iih = new ImageIcon(this.getClass().getResource("head.png"));
-		// head = iih.getImage();
 
 		x = new int[MAX_DOT];
 		y = new int[MAX_DOT];
@@ -39,7 +32,7 @@ public class Snake {
 			this.colorTail = Color.GREEN;
 		} else if(type == 2) {
 			this.colorHead = Color.ORANGE;
-			this.colorTail = Color.GREEN;
+			this.colorTail = Color.CYAN;
 		}
 	}
 
@@ -133,7 +126,7 @@ public class Snake {
 	public boolean killSelf() {
 
 		for (int i = this.nbDot - 1; i > 0; i--) {
-			if (/* (i > 4) && */(x[0] == x[i] && y[0] == y[i])) {
+			if ((x[0] == x[i] && y[0] == y[i])) {
 				return true;
 			}
 		}
