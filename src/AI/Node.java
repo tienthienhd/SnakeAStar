@@ -6,10 +6,12 @@ public class Node {
 	public Node parent;
 	public double costFromStart;
 	public double costEstimateToGoal;
+	public boolean passable;
 	
-	public Node(int x, int y) {
+	public Node(int x, int y, boolean passable) {
 		this.x = x;
 		this.y = y;
+		this.passable = passable;
 	}
 	
 	public double getCost() {
@@ -19,4 +21,5 @@ public class Node {
 	public String toString() {
 		return "(" + this.x + "," + this.y + ")";
 	}
+
 }

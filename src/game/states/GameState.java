@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.io.File;
 import java.util.ArrayList;
 
 import ai.Node;
@@ -28,7 +29,8 @@ public class GameState extends State {
 
 	public GameState(Handler handler) {
 		super(handler);
-		graph = new Graph(GamePanel.WIDTH, GamePanel.HEIGHT);
+//		graph = new Graph(GamePanel.WIDTH, GamePanel.HEIGHT);
+		graph = new Graph(Utils.loadMap(new File("map1.txt")));
 		path = new ArrayList<>();
 	}
 
@@ -78,7 +80,7 @@ public class GameState extends State {
 			drawGameOver(g);
 			this.handler.setGameRunning(false);
 		} else {
-			// drawMap(dbg);
+			drawMap(g);
 			drawFruit(g);
 			if (player != null)
 				player.draw(g);
@@ -108,6 +110,10 @@ public class GameState extends State {
 		if (snake.x[0] < 0 || snake.y[0] < 0 || snake.x[0] > GamePanel.WIDTH || snake.y[0] > GamePanel.HEIGHT) {
 			this.handler.setGameOver(true);
 		}
+		
+		if(!graph.passable(snake.x[0], snake.y[0])) {
+			this.handler.setGameOver(true);
+		}
 	}
 
 	private boolean checkEat(Snake snake) {
@@ -130,6 +136,9 @@ public class GameState extends State {
 				continue;
 			}
 			if (player != null && player.onSnake(xFruit, yFruit)) {
+				continue;
+			}
+			if(!graph.passable(xFruit, yFruit)) {
 				continue;
 			}
 			break;
@@ -162,5 +171,19 @@ public class GameState extends State {
 			g.drawString("Computer's score: " + snake.nbDot, 
 					(GamePanel.WIDTH_PIXEL - metr.stringWidth("Computer's score: ")) / 2,
 					GamePanel.HEIGHT_PIXEL / 2 + metr.getHeight() + 10 + 30);
+	}
+	
+	private void drawMap(Graphics g) {
+		for(int i = 0; i < graph.getHeight(); i++) {
+			for(int j = 0; j < graph.getWidth(); j++) {
+				Node node = graph.getNode(j, i);
+				if(node.passable) {
+					g.setColor(Color.GRAY);
+				} else {
+					g.setColor(Color.BLACK);
+				}
+				g.fillRect(j * Snake.DOT_SIZE, i * Snake.DOT_SIZE, Snake.DOT_SIZE, Snake.DOT_SIZE);
+			}
+		}
 	}
 }

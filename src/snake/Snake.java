@@ -11,7 +11,7 @@ public class Snake {
 	public int[] x;
 	public int[] y;
 	public int nbDot;
-	Direction direction;
+	public Direction direction;
 	Color colorTail = Color.GREEN;
 	Color colorHead = Color.RED;
 

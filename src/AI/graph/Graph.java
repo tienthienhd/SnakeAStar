@@ -14,7 +14,7 @@ public class Graph {
 		this.graph = new Node[height][width];
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				graph[i][j] = new Node(j, i);
+				graph[i][j] = new Node(j, i, true);
 			}
 		}
 	}
@@ -27,7 +27,7 @@ public class Graph {
 		this.graph = new Node[map.length][map[0].length];
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[0].length; j++) {
-				graph[i][j] = new Node(j, i);
+				graph[i][j] = new Node(j, i, map[i][j] == 0 ? true : false);
 			}
 		}
 	}
@@ -37,25 +37,25 @@ public class Graph {
 		
 		if(onBoard(node.x, node.y - 1)) {
 			Node up = graph[node.y - 1][node.x];
-			if(!onSnake(up)) {
+			if(!onSnake(up) && up.passable) {
 				neighbors.add(up);
 			}
 		}
 		if(onBoard(node.x, node.y + 1)) {
 			Node down = graph[node.y + 1][node.x];
-			if(!onSnake(down)) {
+			if(!onSnake(down) && down.passable) {
 				neighbors.add(down);
 			}
 		}
 		if(onBoard(node.x + 1, node.y)) {
 			Node right = graph[node.y][node.x + 1];
-			if(!onSnake(right)) {
+			if(!onSnake(right) && right.passable) {
 				neighbors.add(right);
 			}
 		}
 		if(onBoard(node.x - 1, node.y)) {
 			Node left = graph[node.y][node.x - 1];
-			if(!onSnake(left)) {
+			if(!onSnake(left) && left.passable) {
 				neighbors.add(left);
 			}
 		}
@@ -100,5 +100,9 @@ public class Graph {
 	
 	public void setSnake(Snake snake) {
 		this.snake = snake;
+	}
+	
+	public boolean passable(int x, int y) {
+		return this.getNode(x, y).passable;
 	}
 }

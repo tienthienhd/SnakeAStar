@@ -1,8 +1,13 @@
 package utils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Scanner;
 
 import ai.Node;
 import snake.Direction;
@@ -71,7 +76,46 @@ public class Utils {
 			p.add(dir);
 			from = to;
 		}
-		// p.removeLast();
 		return p;
+	}
+	
+	
+	public static int[][] loadMap(File file){
+		if(!file.exists()) {
+			System.out.println("File don't exists!");
+			System.exit(1);
+		}
+		FileReader fr;
+		try {
+			fr = new FileReader(file);
+			Scanner scanner = new Scanner(fr);
+			
+			int width = scanner.nextInt();
+			int height = scanner.nextInt();
+			int[][] matrix = new int[height][width];
+			
+			for(int i = 0; i < height; i++) {
+				for(int j = 0; j < width; j++) {
+					matrix[i][j] = scanner.nextInt();
+				}
+			}
+			scanner.close();
+			fr.close();
+			return matrix;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		int[][] map = loadMap(new File("map1.txt"));
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[0].length; j++) {
+				System.out.print(map[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 }
