@@ -7,13 +7,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
-
-import org.w3c.dom.events.MouseEvent;
 
 import game.states.GameState;
 import game.states.MenuState;
@@ -105,14 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
 		gameState = new GameState(this.handler);
     	menuState = new MenuState(this.handler);
     	State.setState(menuState, 0);
-//    	State.setState(gameState);
-    	
-		
-		// Location start = new Location(snake.x[0] / Snake.DOT_SIZE, snake.y[0] /
-		// Snake.DOT_SIZE);
-		// path = AStar.parseToDirection(start,
-		// AStar.findPath(map, start, new Location(fruit.x / Snake.DOT_SIZE, fruit.y /
-		// Snake.DOT_SIZE)));
 	}
 
 	// update data of game

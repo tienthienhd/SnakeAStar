@@ -6,8 +6,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import ai.AStar;
 import ai.Node;
+import ai.graph.AStar;
 import ai.graph.Graph;
 import game.GamePanel;
 import game.Handler;
@@ -136,10 +136,10 @@ public class GameState extends State {
 		} while (true);
 
 		if (snake != null) {
-			Node start = new Node(snake.x[0], snake.y[0]);
+			Node start = graph.getNode(snake.x[0], snake.y[0]);
 			graph.setSnake(snake);
 
-			ArrayList<Node> p = AStar.findPath(graph, start, new Node(xFruit, yFruit));
+			ArrayList<Node> p = AStar.findPath(graph, start, graph.getNode(xFruit, yFruit));
 			if (p != null)
 				path = Utils.parsePath(start, p);
 		}

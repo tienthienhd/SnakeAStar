@@ -1,28 +1,14 @@
-package ai;
+package ai.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-import ai.graph.Graph;
-import snake.Direction;
+import ai.Node;
 import utils.Utils;
 
 public class AStar {
 	
-//	public static void main(String[] args) {
-//		Graph graph = new Graph(10, 10);
-//		ArrayList<Node> path = findPath(graph, graph.getNode(0, 0), graph.getNode(3, 3));
-//		
-//		for(Node node: path) {
-//			System.out.println(node);
-//		}
-//		
-//		ArrayList<Direction> pathDir = Utils.parsePath(graph.getNode(0, 0), path);
-//		for(Direction dir: pathDir) {
-//			System.out.println(dir);
-//		}
-//	}
 
 	public static ArrayList<Node> findPath(Graph graph, Node start, Node goal) {
 		PriorityQueue<Node> open = new PriorityQueue<>(Utils.comp);
@@ -61,24 +47,6 @@ public class AStar {
 						open.add(neighbor);
 					}
 				}
-				
-//				if(Utils.contains(closed, neighbor) != null) {
-//					
-//					continue;
-//				}
-//				
-//				if(Utils.contains(open, neighbor) == null) {
-//					open.add(neighbor);
-//				}
-//				
-//				double costFromStartOfNeighbor = current.costFromStart + graph.getCost(current, neighbor);
-//				if(costFromStartOfNeighbor >= neighbor.costFromStart) {
-//					continue;
-//				}
-//				
-//				neighbor.parent = current;
-//				neighbor.costFromStart = costFromStartOfNeighbor;
-//				neighbor.costEstimateToGoal = heuristic(neighbor, goal);
 			}
 		}
 
@@ -96,11 +64,6 @@ public class AStar {
 		Collections.reverse(path);
 		return path;
 	}
-	
-//	public static ArrayList<Node> reversePath(ArrayList<Node> path){
-//		Collections.reverse(path);
-//		return path;
-//	}
 	
 	public static double heuristic(Node start, Node goal) {
 		return Math.abs(start.x - goal.x) + Math.abs(start.y - goal.y);

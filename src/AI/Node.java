@@ -3,9 +3,9 @@ package ai;
 public class Node {
 
 	public int x,y;
-	Node parent;
-	double costFromStart;
-	double costEstimateToGoal;
+	public Node parent;
+	public double costFromStart;
+	public double costEstimateToGoal;
 	
 	public Node(int x, int y) {
 		this.x = x;

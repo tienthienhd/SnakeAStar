@@ -18,6 +18,19 @@ public class Graph {
 			}
 		}
 	}
+	
+	public Graph(int[][] map) {
+		if(map == null || map[0] == null) {
+			System.out.println("Load map failed");
+			System.exit(1);
+		}
+		this.graph = new Node[map.length][map[0].length];
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[0].length; j++) {
+				graph[i][j] = new Node(j, i);
+			}
+		}
+	}
 
 	public ArrayList<Node> getNeighbor(Node node) {
 		ArrayList<Node> neighbors = new ArrayList<>();
