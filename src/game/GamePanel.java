@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	// properties of frame
-	public static final String title = "Game RPG ver 1.0";
+	public static final String title = "Snake AI";
 	public static final int WIDTH_PIXEL = 500;
 	public static final int HEIGHT_PIXEL = WIDTH_PIXEL;// * 9 / 16; // 9/16 la ti le khung hinh chuan
 	public static final int WIDTH = WIDTH_PIXEL / Snake.DOT_SIZE;
