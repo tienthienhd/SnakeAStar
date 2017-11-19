@@ -12,11 +12,13 @@ public class Snake {
 	public int[] y;
 	public int nbDot;
 	Direction direction;
+	Color colorTail = Color.GREEN;
+	Color colorHead = Color.RED;
 
 	// private Image head;
 	// private Image ball;
 
-	public Snake(int initDot) {
+	public Snake(int initDot, int type) {
 		// ImageIcon iid = new ImageIcon(this.getClass().getResource("dot.png"));
 		// ball = iid.getImage();
 		//
@@ -32,6 +34,13 @@ public class Snake {
 			y[i] = 0;
 		}
 		direction = Direction.RIGHT;
+		if(type == 1) {
+			this.colorHead = Color.RED;
+			this.colorTail = Color.GREEN;
+		} else if(type == 2) {
+			this.colorHead = Color.ORANGE;
+			this.colorTail = Color.GREEN;
+		}
 	}
 
 	public void control(Direction dir) {
@@ -63,28 +72,28 @@ public class Snake {
 		switch (direction) {
 		case DOWN:
 			if (y[0] >= GamePanel.HEIGHT - 1) {
-				y[0] = 0;
+//				y[0] = 0;
 			} else {
 				y[0]++;
 			}
 			break;
 		case LEFT:
 			if (x[0] <= 0) {
-				x[0] = GamePanel.WIDTH - 1;
+//				x[0] = GamePanel.WIDTH - 1;
 			} else {
 				x[0]--;
 			}
 			break;
 		case RIGHT:
 			if (x[0] >= GamePanel.WIDTH - 1) {
-				x[0] = 0;
+//				x[0] = 0;
 			} else {
 				x[0]++;
 			}
 			break;
 		case UP:
 			if (y[0] <= 0) {
-				y[0] = GamePanel.HEIGHT - 1;
+//				y[0] = GamePanel.HEIGHT - 1;
 			} else {
 				y[0]--;
 			}
@@ -92,13 +101,13 @@ public class Snake {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.GREEN);
+		g.setColor(colorTail);
 		for (int i = 1; i < this.nbDot; i++) {
 			// g.drawImage(ball, x[i], y[i], null);
 			g.fillOval(x[i] * DOT_SIZE, y[i] * DOT_SIZE, DOT_SIZE, DOT_SIZE);
 		}
 		// g.drawImage(head, x[0], y[0], null);
-		g.setColor(Color.RED);
+		g.setColor(colorHead);
 		g.fillOval(x[0] * DOT_SIZE, y[0] * DOT_SIZE, DOT_SIZE, DOT_SIZE);
 		g.setColor(Color.BLACK);
 		switch (direction) {

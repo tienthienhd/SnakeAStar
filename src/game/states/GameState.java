@@ -34,14 +34,14 @@ public class GameState extends State {
 
 	public void newGame(int mode) {
 		if (mode == 1) {
-			player = new Snake(3);
+			player = new Snake(3, 1);
 			handler.addKeyListener(player);
 		} else if (mode == 2) {
-			player = new Snake(3);
-			snake = new Snake(3);
+			player = new Snake(3, 1);
+			snake = new Snake(3, 2);
 			handler.addKeyListener(player);
 		} else if (mode == 3) {
-			snake = new Snake(3);
+			snake = new Snake(3, 2);
 		}
 		newFruit();
 	}
@@ -88,12 +88,12 @@ public class GameState extends State {
 			g.setColor(Color.ORANGE);
 			g.setFont(normalFont);
 			if (snake == null)
-				g.drawString("Score: " + player.nbDot, GamePanel.WIDTH_PIXEL - 60, 13);
-			
+				g.drawString("Score: " + player.nbDot, GamePanel.WIDTH_PIXEL - 70, 13);
+
 			if (player == null)
-				g.drawString("Score: " + snake.nbDot, GamePanel.WIDTH_PIXEL - 60, 13);
-			
-			if(snake != null && player != null) {
+				g.drawString("Score: " + snake.nbDot, GamePanel.WIDTH_PIXEL - 70, 13);
+
+			if (snake != null && player != null) {
 				g.drawString("Player's score: " + player.nbDot, GamePanel.WIDTH_PIXEL - 150, 13);
 				g.drawString("Computer's score: " + snake.nbDot, GamePanel.WIDTH_PIXEL - 150, 33);
 			}
@@ -150,10 +150,17 @@ public class GameState extends State {
 		Font small = new Font("Helvetica", Font.BOLD, 30);
 		FontMetrics metr = this.handler.getFontMetrics(small);
 
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GREEN);
 		g.setFont(small);
 		g.drawString(msg, (GamePanel.WIDTH_PIXEL - metr.stringWidth(msg)) / 2, GamePanel.HEIGHT_PIXEL / 2);
-		g.drawString("Your score: " + snake.nbDot, (GamePanel.WIDTH_PIXEL - metr.stringWidth(msg)) / 2,
-				GamePanel.HEIGHT_PIXEL / 2 + metr.getHeight() + 10);
+		
+		if (player != null)
+			g.drawString("Your score: " + player.nbDot, 
+					(GamePanel.WIDTH_PIXEL - metr.stringWidth("Your score: ")) / 2,
+					GamePanel.HEIGHT_PIXEL / 2 + metr.getHeight() + 10);
+		if (snake != null)
+			g.drawString("Computer's score: " + snake.nbDot, 
+					(GamePanel.WIDTH_PIXEL - metr.stringWidth("Computer's score: ")) / 2,
+					GamePanel.HEIGHT_PIXEL / 2 + metr.getHeight() + 10 + 30);
 	}
 }
